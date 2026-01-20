@@ -2,11 +2,13 @@ import os
 import time
 import random
 import logging
+import exifread
 from datetime import datetime, timedelta
 from PIL import Image
 
+logging.basicConfig(filename='./logs/app.log', level=logging.DEBUG, format='LOG.%(levelname)s: %(message)s')
 
-def remove_metadata(input_path, output_path):
+def copy_img_without_metadata(input_path, output_path):
     """
         Removes metadata and generates a completely new image
     """
@@ -33,7 +35,7 @@ def remove_metadata(input_path, output_path):
     )
 
     logging.info("High quality image generated")
-    return ;
+    return
 
 def set_custom_timestamp(file_path, dt = None):
     """
@@ -54,5 +56,26 @@ def set_custom_timestamp(file_path, dt = None):
                                         )
         ts = time.mktime(random_past_time.timetuple())
         os.utime(file_path, (ts, ts))
+    return
 
-    return ;
+def get_metadata(img_path,out_path):
+    # If invalid path throw error
+    if not img_path.is_file():
+        raise FileNotFoundError("Image not found")
+    output_txt = out_path.with_suffix(".txt")
+    # fetch metadata
+    with open(img_path, "rb") as img_file:
+        tags = exifread.process_file(
+            img_file,
+            details=True,
+            strict=False
+        )
+    # save metadata in a text file
+    with open(output_txt, "w", encoding="utf-8") as out:
+        if not tags:
+            out.write("No EXIF metadata found.\n")
+            return output_txt
+        for tag, value in sorted(tags.items()):
+            out.write(f"{tag}: {value}\n")
+    logging.debug(f'Metadata saved for {img_path.name} in file: {output_txt.name}')
+    return

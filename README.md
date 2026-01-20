@@ -1,4 +1,4 @@
-# image-metadata-cleaner
+# image-metadata-extractor
 Mini code which reconstructs an image without its initial metadata
 
 ### Usage

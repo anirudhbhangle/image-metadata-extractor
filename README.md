@@ -3,6 +3,9 @@ Mini code which reconstructs an image without its initial metadata
 
 ### Usage
 
+Pre-requisite:
+- Install Python and the python modules included in requirements.txt
+
 Input:
 - Add all images to be cleaned in input folder in root directory
     e.g. "src/input/image.jpg"

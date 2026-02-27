@@ -23,7 +23,7 @@ def clean_images():
     processed = 0
     for img in input_dir.iterdir():
         if img.suffix.lower() not in SUPPORTED_EXTENSIONS:
-            logger.warning(f'File with non supported extension ignored: {img}')
+            logger.warning(f'File with non-supported extension in folder \"{input_dir.name}\" was ignored: {img.name}')
             continue
         imgcpy = output_dir / img.name
 

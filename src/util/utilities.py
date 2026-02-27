@@ -95,5 +95,5 @@ def get_metadata(img_path,out_path):
         for tag, value in sorted(tags.items()):
             out.write(f"{tag}: {value}\n")
 
-    logger.debug(f'Metadata saved for {img_path.name} in file: {output_txt.name}')
+    logger.info(f'Metadata saved for {img_path.name} in file: {output_txt.name}')
     return;

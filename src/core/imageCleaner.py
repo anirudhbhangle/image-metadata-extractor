@@ -14,7 +14,7 @@ def clean_images():
 
     # mandatory input folder
     if not input_dir.is_dir():
-        logger.error(f"Input folder not found: {input_dir}")
+        logger.error(f"Input folder not found in: {base_dir}")
         return
     # if output folder not present, create one
     output_dir.mkdir(exist_ok=True)
@@ -23,7 +23,7 @@ def clean_images():
     processed = 0
     for img in input_dir.iterdir():
         if img.suffix.lower() not in SUPPORTED_EXTENSIONS:
-            logger.warning(f'Image with non supported extension ignored: {img}')
+            logger.warning(f'File with non supported extension ignored: {img}')
             continue
         imgcpy = output_dir / img.name
 
@@ -43,5 +43,5 @@ def clean_images():
             logger.error(f'Error occurred while processing file: {img}')
 
     logger.info(f'Successful Image counter: {processed}')
-    logger.info(f'{processed} number of cleaned images have been created in folder: {output_dir.name}')
+    logger.info(f'{processed} number of clean images have been generated in folder: {output_dir.name}')
     return;

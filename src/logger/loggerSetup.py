@@ -37,6 +37,7 @@ LOGGING_CONFIG = {
             "maxBytes": 5 * 1024 * 1024,  # 5MB
             "backupCount": 3,
             "encoding": "utf8",
+            "level": "ERROR"
         }
     },
     "root": {
